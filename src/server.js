@@ -1,18 +1,35 @@
+require("express-async-errors");
+const migrationsRun = require("./database/sqlite/migrations");
+const AppError = require("./utils/AppError");
+
 const express = require("express"); //importando o express
+
+const routes = require("./routes");
+
+migrationsRun();
 
 const app = express(); //inicializando o express
 app.use(express.json());
 
-/*app.get("/",(request,response) => {
-    response.send("Hello Word");
-}) // definindo a rota get raiz / ou seja se o usuario acessar somente a url do site vai retornar por padrao oq tiver no raiz */
+app.use(routes);
 
-app.post("/users",(request,response) => {
-    const {name,email,password} = request.body;
-    //response.send("voce chamou o metodo POST");
 
-    response.json({name,email,password});
-}) //definindo uma rota POST para a rota /users, se o usuario chamar a rota /users com o metodo post ira retornar a funcao que definimos
+
+app.use((error,request,response,next) => {
+    if(error instanceof AppError){
+        return response.status(error.statusCode).json({
+            status:"error",
+            message: error.message
+        });
+    }
+
+    console.log(error);
+
+    return response.status(500).json({
+        status: "error",
+        message: "Internal server"
+    })
+})
 
 const PORT = 3333; // definindo a porta
 
