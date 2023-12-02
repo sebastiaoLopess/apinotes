@@ -12,3 +12,5 @@ async function sqliteConnection(){
 }
 
 module.exports = sqliteConnection;
+
+//arquivo de configuracao do banco de dados, atraves dele fazendo a conexao

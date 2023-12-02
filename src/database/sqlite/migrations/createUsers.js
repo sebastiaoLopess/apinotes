@@ -16,3 +16,5 @@ create table if not exists users(
 
 module.exports = createUsers;
 
+// arquivo com o codigo sql que cria uma tabela que sera usado no arquivo que executa a migration
+

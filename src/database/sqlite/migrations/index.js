@@ -12,3 +12,5 @@ async function migrationsRun(){
 }
 
 module.exports = migrationsRun
+
+// arquivo que executa a migration para criacao de uma tabela automatizada

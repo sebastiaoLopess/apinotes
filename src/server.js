@@ -4,14 +4,14 @@ const AppError = require("./utils/AppError");
 
 const express = require("express"); //importando o express
 
-const routes = require("./routes");
+const routes = require("./routes"); // importando o arquivo routes
 
 migrationsRun();
 
 const app = express(); //inicializando o express
 app.use(express.json());
 
-app.use(routes);
+app.use(routes); // apontando para routes
 
 
 
@@ -21,14 +21,14 @@ app.use((error,request,response,next) => {
             status:"error",
             message: error.message
         });
-    }
+    } //tratando erro de cliente
 
     console.log(error);
 
     return response.status(500).json({
         status: "error",
         message: "Internal server"
-    })
+    }) // tratando erro de servidor
 })
 
 const PORT = 3333; // definindo a porta
