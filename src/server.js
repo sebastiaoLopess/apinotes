@@ -11,7 +11,7 @@ const routes = require("./routes"); // importando o arquivo routes
 migrationsRun();
 
 const app = express(); //inicializando o express
-app.use(cors());
+app.use(cors()); // habilitando o cors para possibilitar a integracao com o frontend
 app.use(express.json());
 
 app.use('/files',express.static(uploadConfig.UPLOADS_FOLDER));
